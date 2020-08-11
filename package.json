@@ -1,5 +1,5 @@
 {
-  "name": "react-timeseries-chart",
+  "name": "@cognite/react-timeseries-chart",
   "version": "0.1.0",
   "main": "dist/index.js",
   "repository": "git@github.com:cognitedata/react-timeseries-chart.git",
