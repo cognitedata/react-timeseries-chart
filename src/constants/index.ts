@@ -1,0 +1,43 @@
+export const version = '__REPLACE_package_version__';
+export const ERROR_NO_SDK_CLIENT =
+  'Client SDK Context has not been provided. Use ClientSDKProvider to wrap the component.';
+export const SDK_EXCLUDE_FROM_TRACKING_METHODS = [
+  'setOneTimeSdkHeader',
+  'project',
+  'loginWithOAuth',
+  'loginWithApiKey',
+  'setBaseUrl',
+  'getMetadata',
+  'get',
+  'put',
+  'post',
+  'delete',
+] as const;
+export const ColorList = [
+  '#0097e6',
+  '#e1b12c',
+  '#8E44AD',
+  '#c23616',
+  '#40739e',
+  '#273c75',
+  '#8c7ae6',
+  '#3366CC',
+  '#DC3912',
+  '#FF9900',
+  '#109618',
+  '#990099',
+  '#3B3EAC',
+  '#0099C6',
+  '#DD4477',
+  '#66AA00',
+  '#B82E2E',
+  '#316395',
+  '#994499',
+  '#22AA99',
+  '#AAAA11',
+  '#6633CC',
+  '#E67300',
+  '#8B0707',
+  '#329262',
+  '#5574A6',
+];

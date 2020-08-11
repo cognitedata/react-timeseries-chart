@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es5",
+    "declaration": true,
+    "declarationDir": "dist",
+    "outDir": "dist",
+    "strict": true,
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "lib": [
+      "es2019",
+      "dom"
+    ],
+    "typeRoots": ["node_modules/@types","src/@types"],
+    "jsx": "react",
+    "rootDir": "src",
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
