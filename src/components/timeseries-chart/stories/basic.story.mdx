@@ -21,20 +21,15 @@ import {
 
 # Timeseries Chart
 
-This component loads the datapoints given a timeseries id and renders a line chart of those points.
-The component requires only `timeseriesIds`
-
-**NOTE:** The component should have `ClientSDKProvider` as a parent component in react component tree.
+This component loads the datapoints given series and renders a line chart of those points.
 
 ### Basic usage:
 
 Imports:
 
 ```typescript
-import 'antd/dist/antd.css';
-
 import React from 'react';
-import { TimeseriesChart } from '@cognite/gearbox';
+import { TimeseriesChart } from '@cognite/react-timeseries-chart';
 
 ```
 
@@ -49,25 +44,33 @@ import { TimeseriesChart } from '@cognite/gearbox';
 
 ## Available props
 
-### Required
-Component has two ways of initialization. You should choose one of them to provide component data to render proper charts
-
-**via** `series`
 <Props of={TimeseriesComponent} />
 
 ### Types
 
-### DataProviderSeries
+### TimeseriesChartSeries
 
 ```typescript
-interface DataProviderSeries {
+interface TimeseriesChartSeries {
   id: number;
+  collectionId?: number;
   color?: string;
-  yAxisDisplayMode?: AxisDisplayModeType;
   hidden?: boolean;
-  yAccessor?: YAccessor;
-  y0Accessor?: YAccessor;
-  y1Accessor?: YAccessor;
+  step?: boolean;
+  zoomable?: boolean;
+  name?: string;
+  timeAccessor?: AccessorFunction;
+  xAccessor?: AccessorFunction;
+  x0Accessor?: AccessorFunction;
+  x1Accessor?: AccessorFunction;
+  yAccessor?: AccessorFunction;
+  y0Accessor?: AccessorFunction;
+  y1Accessor?: AccessorFunction;
+  yDomain?: [number, number];
+  ySubDomain?: [number, number];
+  yAxisPlacement?: AxisPlacementKeys;
+  yAxisDisplayMode?: AxisDisplayModeKeys;
+  opacity?: number;
 }
 ```
 
@@ -79,7 +82,7 @@ You can only override the outermost container.
 The type can be imported from `@cognite/gearbox`:
 
 ```typescript
-import { TimeseriesChartStyles } from '@cognite/gearbox';
+import { TimeseriesChartStyles } from '@cognite/react-timeseries-chart';
 ```
 
 Definition:
@@ -92,17 +95,17 @@ interface TimeseriesChartStyles {
 
 See more details in `Custom container styles` example.
 
-### ChartRulerConfig
+### TimeseriesChartRulers
 
-This interface defines the visibilty and custom label formatters for ruler in `TimeseriesChart`component.
+This interface defines the visibility and custom label formatters for ruler in `TimeseriesChart`component.
 
 Definition:
 
 ```typescript
-interface ChartRulerConfig {
-  visible?: boolean;
-  timeLabel?: (point: ChartRulerPoint) => string;
-  yLabel?: (point: ChartRulerPoint) => string;
+interface TimeseriesChartRuler {
+  visible: boolean;
+  timeFormatter?: (timestamp: number) => string;
+  valueFormatter?: (value: number) => string;
 }
 ```
 
@@ -351,16 +354,16 @@ The value of chart point(s) under the ruler are displayed as a list in a "cursor
 ```typescript
 const ruler = {
   visible: true,
-  yLabel: (point: any) => `${Number.parseFloat(point.value).toFixed(3)}`,
-  timeLabel: (point: any) => point.timestamp.toString(),
+  timeFormatter: (timestamp: number) => (new Date(timestamp)).toString(),
+  valueFormatter: (value: number) => `${Number.parseFloat(value).toFixed(3)}`,
 };
 ```
 
-`timeLabel` is an optional callback for formatting the ruler timestamp - this get called only once even with multiple points under the ruler.
+`timeFormatter` is an optional callback for formatting the ruler timestamp - this get called only once even with multiple points under the ruler.
 
-`yLabel` is an optional callback for formatting the "value of each ruler point" - this gets called once for each point under the ruler
+`valueFormatter` is an optional callback for formatting the "value of each ruler point" - this gets called once for each point under the ruler
 
-Since both `yLabel` and `timeLabel` are optional. giving an empty object for `ruler` prop uses the built-in timeLabel and yLabel callbacks.
+Since both `valueFormatter` and `timeFormatter` are optional. giving an empty object for `ruler` prop uses the built-in timeFormatter and valueFormatter callbacks.
 
 
 <Preview>
@@ -401,26 +404,16 @@ const handleBlur = (e: any) => console.log('onBlur', e)
 ### Custom series
 
 ```typescript
-import { AxisDisplayMode } from '@cognite/griff-react';
-import { DataLoader } from '@cognite/gearbox';
-
 const series = [
   {
     id: 123,
     color: 'green',
-    yAxisDisplayMode: AxisDisplayMode.ALL,
     hidden: false,
-    y0Accessor: DataLoader.y0Accessor,
-    y1Accessor: DataLoader.y1Accessor,
-    yAccessor: DataLoader.yAccessor,
   },
   {
     id: 456,
     color: 'red',
-    y0Accessor: DataLoader.y0Accessor,
-    y1Accessor: DataLoader.y1Accessor,
-    yAccessor: DataLoader.yAccessor,
-  },
+  }
 ];
 ```
 
