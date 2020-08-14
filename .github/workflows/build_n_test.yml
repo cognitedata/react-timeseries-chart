@@ -1,9 +1,8 @@
 name: Lint & Build & Test & Deploy
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
+  push:
     branches: [ master ]
 
 jobs:
@@ -49,3 +48,13 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./storybook-static
+
+      - name: Check if version has been updated
+        id: version_check
+        uses: EndBug/version-check@v1
+
+      - name: Deploy 🚀
+          if: success() && github.event_name == 'push' && github.ref == 'refs/heads/master' && steps.version_check.outputs.changed == 'true'
+          env:
+            NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          run: npm publish

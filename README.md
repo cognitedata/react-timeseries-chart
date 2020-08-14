@@ -26,3 +26,6 @@ const Component = () => {
 ``` 
 
 You can check [storybook](https://cognitedata.github.io/react-timeseries-chart/?path=/docs/time-series-timeserieschart--basic-usage) for more examples.
+
+## Deployment
+To deploy package to `npm` you should push changes to the master branch with bumped package version (in `package.json`)
