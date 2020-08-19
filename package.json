@@ -1,11 +1,11 @@
 {
   "name": "@cognite/react-timeseries-chart",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "git@github.com:cognitedata/react-timeseries-chart.git",
   "author": "Roman Vizniak <mr.traser@gmail.com>",
   "license": "Apache-2.0",
-  "private": false,
   "scripts": {
     "build": "yarn clean && rollup -c && yarn esCheck",
     "build-storybook": "node --max_old_space_size=2048 ./node_modules/.bin/build-storybook -s ./public",
@@ -67,6 +67,10 @@
     "moment": "^2.27.0",
     "react": "^16.13.1",
     "styled-components": "^5.1.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "husky": {
     "hooks": {
