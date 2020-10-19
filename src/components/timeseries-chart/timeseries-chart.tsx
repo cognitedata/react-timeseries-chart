@@ -120,6 +120,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
   yAxisPlacement = 'RIGHT',
   liveUpdate = false,
   annotations = [],
+  onClickAnnotation,
   collections = [],
   onFetchDataError = (e: Error) => {
     throw e;
@@ -310,6 +311,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
             onMouseOut={onMouseOut}
             onBlur={onBlur}
             size={size}
+            onClickAnnotation={onClickAnnotation}
           />
         </DataProvider>
       </Wrapper>
