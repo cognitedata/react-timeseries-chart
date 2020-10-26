@@ -6,6 +6,9 @@
   "repository": "cognitedata/react-timeseries-chart",
   "author": "Roman Vizniak <mr.traser@gmail.com>",
   "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "yarn clean && rollup -c && yarn esCheck",
     "build-storybook": "node --max_old_space_size=2048 ./node_modules/.bin/build-storybook -s ./public",
