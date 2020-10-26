@@ -142,6 +142,7 @@ declare module '@cognite/griff-react' {
       width?: number;
       height?: number;
     };
+    onClickAnnotation?: (annotation, x, y) => void;
   }
 
   export class LineChart extends Component<LineChartProps> {}

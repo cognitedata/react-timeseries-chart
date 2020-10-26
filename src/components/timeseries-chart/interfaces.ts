@@ -189,6 +189,10 @@ export interface TimeseriesChartProps {
    * @ignore
    */
   annotations?: Annotation[];
+  /**
+   * Callback to be triggered on Annotation click
+   */
+  onClickAnnotation?: (annotation: Annotation, x: number, y: number) => void;
 }
 
 export enum DataLoaderCallReasons {
