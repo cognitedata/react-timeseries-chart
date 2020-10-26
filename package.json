@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "git@github.com:cognitedata/react-timeseries-chart.git",
+  "repository": "cognitedata/react-timeseries-chart",
   "author": "Roman Vizniak <mr.traser@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
