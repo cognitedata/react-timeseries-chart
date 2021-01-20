@@ -109,8 +109,8 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
   client: sdkClient,
   series,
   ruler,
-  start = DEFAULT_START_TIME,
-  end = DEFAULT_END_TIME,
+  timeDomain = [DEFAULT_START_TIME, DEFAULT_END_TIME],
+  timeSubDomain,
   pointsPerSeries = 600,
   xAxisHeight = 50,
   updateInterval = 5000,
@@ -277,7 +277,8 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
           onFetchData={onFetchData}
           pointsPerSeries={pointsPerSeries}
           collections={collectionToRender}
-          timeDomain={[+start, +end]}
+          timeDomain={timeDomain?.map((td) => +td)}
+          timeSubDomain={timeSubDomain?.map((tsd) => +tsd)}
           onFetchDataError={onFetchDataError}
           updateInterval={
             liveUpdate

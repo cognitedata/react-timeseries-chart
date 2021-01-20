@@ -67,6 +67,7 @@ declare module '@cognite/griff-react' {
     pointsPerSeries: number;
     series: DataProviderSeries[];
     timeDomain: number[];
+    timeSubDomain?: number[];
     updateInterval: number;
     collections: DataProviderCollection[];
     onUpdateDomains?: (e: any) => void;
