@@ -102,13 +102,13 @@ export interface TimeseriesChartProps {
    */
   series: number[] | TimeseriesChartSeries[];
   /**
-   * Time which timeseries should start from
+   * Time which timeseries should start and end. Should be UNIX timestamps or Dates.
    */
-  start?: number | Date;
+  timeDomain?: [number | Date, number | Date];
   /**
-   * The time the timeseries should end. Should be UNIX timestamp or Date
+   * Time which timeseries should be focused onto by default. Should be UNIX timestamps or Dates.
    */
-  end?: number | Date;
+  timeSubDomain?: [number | Date, number | Date];
   /**
    * Whether the context chart should be showed
    */
