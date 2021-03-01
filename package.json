@@ -1,6 +1,6 @@
 {
   "name": "@cognite/react-timeseries-chart",
-  "version": "1.0.0-alpha",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "cognitedata/react-timeseries-chart",
