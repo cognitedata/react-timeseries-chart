@@ -15,6 +15,8 @@ import {
   DataLoaderCallReasons,
   DataLoaderDatapoint,
   DataLoaderFetchedDatapointsList,
+  FetchedSeries,
+  FilterFetchedSeriesFunc,
 } from './interfaces';
 
 interface SeriesState {
@@ -29,6 +31,8 @@ interface GetTimeseriesParams {
   end: number;
   granularity: string;
 }
+
+const noOpFilter: FilterFetchedSeriesFunc = (_, id) => id;
 
 export class DataLoader {
   static yAccessor = (dp: DataLoaderDatapoint): number => {
@@ -217,14 +221,20 @@ export class DataLoader {
       : { ...oldSeries, data: data };
   };
 
-  cogniteloader = async ({
-    id,
-    timeDomain: baseDomain,
-    timeSubDomain: subDomain,
-    pointsPerSeries,
-    oldSeries,
-    reason,
-  }: DataLoaderProps): Promise<DataProviderSeriesWithDatapoints> => {
+  cogniteloader = (
+    filterSeries: FilterFetchedSeriesFunc = noOpFilter
+  ) => async (
+    loaderProps: DataLoaderProps
+  ): Promise<DataProviderSeriesWithDatapoints> => {
+    const {
+      id,
+      timeDomain: baseDomain,
+      timeSubDomain: subDomain,
+      pointsPerSeries,
+      oldSeries,
+      reason,
+    } = loaderProps;
+
     const fetchDomain = (reason === 'MOUNTED' ? baseDomain : subDomain).map(
       Math.round
     );
@@ -289,7 +299,7 @@ export class DataLoader {
           points as DatapointAggregate[],
           pointsPerSeries
         );
-        let fetchedSeries;
+        let fetchedSeries: FetchedSeries;
 
         if (isRawDataNeeded) {
           let [{ datapoints: data }] = await this.retrieveDatapoints({
@@ -347,7 +357,7 @@ export class DataLoader {
           });
         }
 
-        return { ...oldSeries, ...fetchedSeries };
+        return { ...oldSeries, ...filterSeries(loaderProps, fetchedSeries) };
       }
     }
   };

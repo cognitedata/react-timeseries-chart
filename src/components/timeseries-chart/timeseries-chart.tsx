@@ -272,7 +272,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
         ref={chartWrapper}
       >
         <DataProvider
-          defaultLoader={dataLoader.cogniteloader}
+          defaultLoader={dataLoader.cogniteloader(props.filterSeries)}
           series={seriesToRender}
           onFetchData={onFetchData}
           pointsPerSeries={pointsPerSeries}
