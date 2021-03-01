@@ -9,7 +9,7 @@ import {
   MockCogniteClient,
 } from '../../mocks';
 import { DataLoader } from './data-loader';
-import { DataLoaderDatapoint } from './interfaces';
+import { DataLoaderDatapoint, FilterFetchedSeriesFunc } from './interfaces';
 
 const mockTimeseriesRetrieve = jest.fn();
 const mockDatapointsRetrieve = jest.fn();
@@ -227,7 +227,8 @@ describe('dataLoader', () => {
           pps: number;
           expectedGranularity: string;
         }) => {
-          const result = await dataLoader.cogniteloader(undefined)({
+          const filterSeries: FilterFetchedSeriesFunc = (_, series) => series;
+          const result = await dataLoader.cogniteloader(filterSeries)({
             id: 123,
             timeDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],
             timeSubDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],
