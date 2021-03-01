@@ -136,7 +136,7 @@ describe('dataLoader', () => {
           pps: number;
           expectedGranularity: string;
         }) => {
-          const result = await dataLoader.cogniteloader({
+          const result = await dataLoader.cogniteloader(undefined)({
             id: 123,
             timeDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],
             timeSubDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],
@@ -178,7 +178,7 @@ describe('dataLoader', () => {
         mockDatapointsRetrieve.mockResolvedValue([{ name: 'abc', datapoints }]);
 
         const startTime = Date.now() - 24 * 60 * 60 * 1000;
-        const result = await dataLoader.cogniteloader({
+        const result = await dataLoader.cogniteloader(undefined)({
           id: 123,
           timeDomain: [startTime, Date.now()],
           timeSubDomain: [startTime, Date.now()],
@@ -227,7 +227,7 @@ describe('dataLoader', () => {
           pps: number;
           expectedGranularity: string;
         }) => {
-          const result = await dataLoader.cogniteloader({
+          const result = await dataLoader.cogniteloader(undefined)({
             id: 123,
             timeDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],
             timeSubDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],
@@ -271,7 +271,7 @@ describe('dataLoader', () => {
           },
         ]);
 
-        const result = await dataLoader.cogniteloader({
+        const result = await dataLoader.cogniteloader(undefined)({
           id: 123,
           timeDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],
           timeSubDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],
@@ -312,7 +312,7 @@ describe('dataLoader', () => {
         // @ts-ignore
         DataLoader.mergeInsert.mockReturnValue(datapointsList.datapoints);
 
-        const result = await dataLoader.cogniteloader({
+        const result = await dataLoader.cogniteloader(undefined)({
           id: 123,
           timeDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],
           timeSubDomain: [Date.now() - 24 * 60 * 60 * 1000, Date.now()],

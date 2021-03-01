@@ -1,4 +1,8 @@
-import { AxisDisplayMode, AxisPlacement } from '@cognite/griff-react';
+import {
+  AxisDisplayMode,
+  AxisPlacement,
+  DataLoaderProps,
+} from '@cognite/griff-react';
 import {
   DatapointAggregates,
   Datapoints,
@@ -27,6 +31,17 @@ export type AccessorFunction = (
   index?: number,
   arr?: DataLoaderDatapoint[]
 ) => number;
+
+export interface FetchedSeries {
+  step?: boolean;
+  data: DatapointAggregate[];
+  drawPoints: boolean;
+}
+
+export type FilterFetchedSeriesFunc = (
+  props: DataLoaderProps,
+  fetchedSeries: FetchedSeries
+) => FetchedSeries;
 
 export interface SeriesProps {
   color?: string;
@@ -193,6 +208,11 @@ export interface TimeseriesChartProps {
    * Callback to be triggered on Annotation click
    */
   onClickAnnotation?: (annotation: Annotation, x: number, y: number) => void;
+  /**
+   * function to run after the loader has completed.
+   * Useful for changing yDomains etc.
+   */
+  filterSeries?: FilterFetchedSeriesFunc;
 }
 
 export enum DataLoaderCallReasons {
